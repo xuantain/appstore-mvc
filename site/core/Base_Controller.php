@@ -10,24 +10,20 @@ class Base_Controller extends Sys_Controller {
   * load view
   */
   public function loadView($view, $data = array()) {
-    $this->load_header($data);
-    $this->load_sidebar($data);
+    $this->view->load('header', $data);
+    $this->view->load('sidebar', $data);
     $this->view->load($view, $data);
-    $this->load_footer($data);
+    $this->view->load('footer', $data);
   }
 
-  public function load_header($data = array()) {
+  public function loadViewRightSidebar($view, $data = array()) {
     $this->view->load('header', $data);
-  }
-  
-  public function load_footer($data = array()) {
+    $this->view->load('sidebar', $data);
+    $this->view->load($view, $data);
+    $this->view->load('sidebar-b', $data);
     $this->view->load('footer', $data);
   }
   
-  public function load_sidebar($data = array()) {
-    $this->view->load('sidebar', $data);
-  }
-
   public function __destruct() {
     $this->view->show();
   }

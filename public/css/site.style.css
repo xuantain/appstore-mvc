@@ -30,3 +30,6 @@ body {
 #newest-content {
   margin-top: 30px;
 }
+#detail {
+  border-right: 1px solid #333;
+}

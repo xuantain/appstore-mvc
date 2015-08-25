@@ -7,13 +7,14 @@
   <meta name='viewport', content='width=device-width, initial-scale=1.0'/>
   <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'/> -->
   <!-- <link rel='stylesheet' href='./public/css/bootstrap-datetimepicker.min.css'/> -->
+  <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css'/> -->
   <link rel='stylesheet' href='./public/css/bootstrap.min.css', media='screen'/>
   <link rel='stylesheet' href='./public/css/site.style.css'/>
 </head>
 
 <body>
-<div id='container' class='row'>
-  <div id='header' class='col-xs-12 col-sm-12'>
+<div id='container' class='col-xs-12 col-sm-12'>
+  <div id='header' class='row'>
     <div class='col-xs-2 col-sm-2'>
       <h1><a href='/appstore?c=home&a=index'>AppStore</a></h1>
     </div>
@@ -39,7 +40,7 @@
         <li><a href='#'>Register</a></li>
       </ul>
       <ul id='navigation' class='nav nav-pills col-sm-12'>
-        <li><a href='#'>Upload</a></li>
+        <li><a href='/appstore?c=home&a=upload'>Upload</a></li>
         <li><a href='#'>Download</a></li>
       </ul>
     </div>

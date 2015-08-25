@@ -1,28 +1,16 @@
 <div class='row col-xs-10 col-sm-10'>
 	<div class='row'>
-		<div id='carousel-generic' class='carousel slide' data-ride='carousel' data-interval='3000'>
+		<div id='carousel-generic' class='carousel slide' data-ride='carousel'>
 		  <!-- Wrapper for slides -->
+		  <?php for($i = 0; $i < sizeof($topApps); $i++) { ?>
 		  <div class='carousel-inner'>
-		    <div class='item active'>
-		      <img src='/upload/images/image1.jpg' alt='...'/>
+		    <div class='item disabled'>
+		      <img class='col-xs-5 col-sm-5' src='<?php echo './upload/images/'. $topApps[$i]['main_image'] ?>' alt=''/>
 		      <div class='carousel-caption'>
-		          <h3>Caption Text</h3>
+		          <h3><?php echo $apps[$i]['app_name'] ?></h3>
 		      </div>
 		    </div>
-		    <div class='item'>
-		      <img src='./upload/images/image1.jpg' alt='...'/>
-		      <div class='carousel-caption'>
-		          <h3>Caption Text</h3>
-		      </div>
-		    </div>
-		    <div class='item'>
-		      <img src='' alt='...'/>
-		      <div class='carousel-caption'>
-		          <h3>Caption Text</h3>
-		      </div>
-		    </div>
-		  </div>
- 		  
+			<?php	} ?>
  		  <!-- Indicators -->
 		  <ol class='carousel-indicators'>
 		    <li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>
@@ -40,9 +28,7 @@
 		</div> <!-- Carousel -->
 
 		<div id='newest-content' class=''>
-		<?php 
-			for($i = 0; $i < sizeof($apps); $i++) { 
-		?>
+		<?php for($i = 0; $i < sizeof($apps); $i++) { ?>
 			<ul class='thumbnails'>
 			  <li class='span4 col-sm-2'>
 			    <div class='thumbnail'>
@@ -51,13 +37,11 @@
 			      </a>
 			      <h3><?php echo $apps[$i]['app_name'] ?></h3>
 			      <p><?php echo $apps[$i]['description'] ?></p>
-			      <p><a href='#' class='btn btn-primary'>Download</a></p>
+			      <p><a href='?c=home&a=download&app=<?php echo $apps[$i]['app_id'] ?>' class='btn btn-primary'>Download</a></p>
 			    </div>
 			  </li>
 			</ul>
-		<?php	
-			}
-		 ?>
+		<?php	} ?>
 		</div>
 	</div>
 </div>

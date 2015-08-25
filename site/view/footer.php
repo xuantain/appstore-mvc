@@ -12,5 +12,10 @@
 <!-- <script src='./public/js/jquery.js'/> -->
 <!-- <script src='./public/js/bootstrap.min.js'/> -->
 <!-- <script src='./public/js/bootstrap-datetimepicker.min.js'/> -->
+<script>
+	$().ready(function() {
+    $('#carousel-generic > div')
+  });
+</script>
 </body>
 </html>
