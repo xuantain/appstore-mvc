@@ -1,0 +1,32 @@
+body {
+  background-color: #F1F3F7;
+}
+#header {
+  background-color: #0066CC;
+  color: #ffffff !important;
+}
+#header h1, #header a {
+  color: #ffffff;
+}
+#searching {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+#navigation li a:hover {
+  color: #F1F3F7 !important;
+}
+#section-navigation a {
+  margin-left: 2em;
+}
+.thumbnails li {
+  list-style: none;
+}
+.thumbnails {
+  text-align: center;
+}
+#carousel-generic {
+  margin-top: 50px;
+}
+#newest-content {
+  margin-top: 30px;
+}
