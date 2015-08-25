@@ -40,8 +40,6 @@ class Sys_Model extends Sys_Database_Driver {
     
     $sql = "";
 
-
-
     $result = mysqli_query($this->_conn, $sql);
     
     if (!$result) {

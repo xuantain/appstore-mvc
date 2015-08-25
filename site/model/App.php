@@ -114,4 +114,10 @@ class App extends Sys_Model {
 
     return $medias;
   }
+
+  public function insert($data) {
+
+    return $this->add_new($data);
+  }
+  
 }

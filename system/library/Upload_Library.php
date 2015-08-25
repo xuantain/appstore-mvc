@@ -6,7 +6,7 @@
  *
  * @author Aivis Silins
  */
-class Upload {
+class Upload_Library {
   /**
    * Default directory persmissions (destination dir)
    */
