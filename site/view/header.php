@@ -6,9 +6,8 @@
   <meta name='description' content=''/>
   <meta name='viewport', content='width=device-width, initial-scale=1.0'/>
   <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'/> -->
-  <!-- <link rel='stylesheet' href='./public/css/bootstrap-datetimepicker.min.css'/> -->
-  <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css'/> -->
   <link rel='stylesheet' href='./public/css/bootstrap.min.css', media='screen'/>
+  <link rel='stylesheet' href='./public/css/jquery.bxslider.css'/>
   <link rel='stylesheet' href='./public/css/site.style.css'/>
 </head>
 

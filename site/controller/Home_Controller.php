@@ -10,7 +10,7 @@ class Home_Controller extends Base_Controller {
     $app = new App();
     
     $data = array(
-      'title'      => 'index',
+      'title'      => 'App store',
       'current_cat'=> '',
       'apps'       => $app->getAppList(),
       'topApps'    => $app->getAppsDownloadest(),
@@ -81,7 +81,7 @@ class Home_Controller extends Base_Controller {
 
       if(!empty($appResult)) {
         $uploadDir = './upload/apps/'. $appResult['app_name'] .'/';
-        $file_app_download = $version .'.apk';
+        $file_app_download = $version .'.apt';
         $this->library->download->download_file($uploadDir, $file_app_download);
 
         // $app->update_by_id(array('download' => $appResult['download'] + 1), $appId);
@@ -94,10 +94,14 @@ class Home_Controller extends Base_Controller {
     $this->model->load('App');
     $app = new App();
     
-    $dataInsert = array(
-      'cat_id'    => isset($_POST['category']) ? mysql_escape_string($_POST['category']) : '',
+    $version = isset($_POST['version']) ? mysql_escape_string($_POST['version']) : '';
+    
+    $appInsert = array(
+      'cat_id'      => isset($_POST['category']) ? mysql_escape_string($_POST['category']) : '',
       'user_id'     => '1',
       'app_name'    => isset($_POST['app_name']) ? mysql_escape_string($_POST['app_name']) : '',
+      'main_image'  => 0,
+      'type'        => 'Android',
       'link'        => isset($_POST['link']) ? mysql_escape_string($_POST['link']) : '',
       'description' => isset($_POST['description']) ? mysql_escape_string($_POST['description']) : '',
       'price'       => isset($_POST['price']) ? mysql_escape_string($_POST['price']) : '',
@@ -106,26 +110,53 @@ class Home_Controller extends Base_Controller {
       'download'    => 0
     );
 
-    $file = isset($_POST['file']) ? mysql_escape_string($_POST['file']) : '';
-    $isFileExist = !empty($_FILES[$file]);
+    $isFileExist = !empty($_FILES['file']['name']);
+    $isInsertOK = $app->insert($appInsert);
 
-    $isInsertOK = $app->insert($dataInsert);
+    if ($isInsertOK && $isFileExist) {
 
-    if ($isInsertOk && $isFileExist) {
+      $fileName = $_FILES['file']['name'];
+      $extenion = end(explode(".", $fileName));
 
+      // create folder upload
+      $uploadPath = 'appstore/upload/apps/'. $appInsert['app_name'];
+      
       // load Upload library
-      $this->library->load('upload', './upload/apps');
-      $this->library->upload->file($_FILES['test']);
+      $this->library->load('upload', $uploadPath);
+      $this->library->upload->file($_FILES['file']);
 
       //set max file size (in MB)
-      $upload->set_max_file_size(50);
+      $this->library->upload->set_max_file_size(50);
+      $this->library->upload->set_filename($version.'.'.$extenion);
 
       //set allowed mime types
-      // $upload->set_allowed_mime_types(array('application/pdf'));
+      // $upload->set_allowed_mime_types(array('application/apt'));
 
-      $results = $upload->upload();
+      $results = $this->library->upload->upload();
 
-      var_dump($results);
+      // adding history for new app
+      $appInserted = $app->findAppByProperty($appInsert);
+      $date = new DateTime();
+      $date = $date->format('Y-m-d H:i:sP');
+
+      $appHistory = array(
+        'app_id'      => $appInserted['app_id'],
+        'version'     => $version,
+        'size'        => $_FILES['file']['size'],
+        'new_features'=> isset($_POST['feature']) ? mysql_escape_string($_POST['feature']) : '',
+        'compatible'  => isset($_POST['compatible']) ? mysql_escape_string($_POST['compatible']) : '',
+        'update_date' => $date
+      );
+      $app->insertHistory($appHistory);
+
+      // adding medias for new app
+      $appMedia = array(
+        'app_id'     => $appInserted['app_id'],
+        'media_name' => $version.'.'.$extenion,
+        'type'       => 'apt',
+        'position'   => 0
+      );
+      $app->insertMedia($appMedia);
 
       // redirect to index
       $this->indexAction();

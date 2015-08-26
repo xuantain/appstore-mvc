@@ -94,7 +94,8 @@ class App extends Sys_Model {
       $medias = $this->getAppMedias($appId);
 
       $apps[$i]['images'] = $medias;
-      $apps[$i]['main_image'] = $medias[intval($apps[$i]['main_image'])]['media_name'];
+      $mainImage = $medias[intval($apps[$i]['main_image'])]['media_name'];
+      $apps[$i]['main_image'] = isset($mainImage) ? $mainImage : 0;
 
       // get author
       $sql = "select user_name from users where user_id={$apps[$i]['user_id']}";
@@ -120,4 +121,27 @@ class App extends Sys_Model {
     return $this->add_new($data);
   }
   
+  public function findAppByProperty($data = array()) {
+
+    $where = array();
+
+    foreach ($data as $key => $value) {
+      $where[] = "$key = '{$value}'";
+    }
+
+    $sql = 'select * from apps';
+    if ($where){
+      $sql .= ' where '. implode(' AND ', $where);
+    }
+
+    return $this->get_row($sql);
+  }
+
+  public function insertHistory($data) {
+    return parent::insert('app_histories', $data);
+  }
+
+  public function insertMedia($data) {
+    return parent::insert('media', $data);
+  }
 }

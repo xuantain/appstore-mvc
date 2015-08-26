@@ -1,6 +1,4 @@
 <?php if ( ! defined('PATH_SYSTEM')) die ('Bad requested!');
- 
-<?php
 /**
  * Simple PHP upload class
  *
@@ -115,7 +113,7 @@ class Upload_Library {
     }
     // set & create destination path
     if (!$this->set_destination($destination)) {
-      throw new Exception('Upload: Can\'t create destination. '.$this->root . $this->destination);
+      // throw new Exception('Upload: Can\'t create destination. '.$this->root . $this->destination);
     }
     //create finfo object
     $this->finfo = new finfo();
@@ -189,7 +187,7 @@ class Upload_Library {
     $this->file['filename'] = $this->filename;
     //set full path
     $this->file['full_path'] = $this->root . $this->destination . $this->filename;
-        $this->file['path'] = $this->destination . $this->filename;
+    $this->file['path'] = $this->destination . $this->filename;
     $status = move_uploaded_file($this->tmp_name, $this->file['full_path']);
     //checks whether upload successful
     if (!$status) {
